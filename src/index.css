@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --rose: oklch(0.72 0.18 15);
+    --rose-gold: oklch(0.78 0.08 45);
+    --lavender: oklch(0.75 0.12 320);
+    --background: oklch(0.985 0.012 350);
+    --foreground: oklch(0.28 0.04 340);
+    --muted-foreground: oklch(0.52 0.04 340);
+    --primary: var(--rose);
+    --primary-foreground: oklch(0.99 0.01 350);
+    --gradient-hero: linear-gradient(
+      135deg,
+      oklch(0.985 0.018 350) 0%,
+      oklch(0.965 0.028 320) 45%,
+      oklch(0.975 0.02 15) 100%
+    );
+  }
+
+  .dark {
+    --background: oklch(0.14 0.045 340);
+    --foreground: oklch(0.95 0.018 350);
+    --muted-foreground: oklch(0.68 0.035 340);
+    --primary-foreground: oklch(0.98 0.01 350);
+    --gradient-hero: linear-gradient(
+      135deg,
+      oklch(0.13 0.05 340) 0%,
+      oklch(0.16 0.06 320) 50%,
+      oklch(0.14 0.055 15) 100%
+    );
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-body antialiased;
+    background: var(--background);
+    color: var(--foreground);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: oklch(0.72 0.18 15 / 0.25);
+    color: var(--foreground);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    body {
+      cursor: none;
+    }
+  }
+}
+
+@layer components {
+  .glass {
+    @apply backdrop-blur-xl rounded-3xl border border-white/50 dark:border-white/10;
+    background: oklch(1 0 0 / 0.42);
+    box-shadow:
+      0 8px 32px oklch(0.72 0.18 15 / 0.1),
+      inset 0 1px 0 oklch(1 0 0 / 0.5);
+  }
+
+  .dark .glass {
+    background: oklch(1 0 0 / 0.06);
+    box-shadow:
+      0 8px 32px oklch(0 0 0 / 0.35),
+      inset 0 1px 0 oklch(1 0 0 / 0.08);
+  }
+
+  .text-gradient-romantic {
+    @apply bg-clip-text text-transparent;
+    background-size: 200% auto;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 4s linear infinite;
+    background-size: 200% auto;
+  }
+
+  .btn-glow {
+    @apply relative overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95;
+    box-shadow: 0 0 32px oklch(0.72 0.18 15 / 0.45);
+  }
+
+  .btn-glow:hover {
+    box-shadow: 0 0 48px oklch(0.72 0.18 15 / 0.6);
+  }
+
+  .cursor-glow {
+    @apply fixed pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 rounded-full;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: radial-gradient(circle, oklch(0.78 0.18 15 / 0.45), transparent 70%);
+  }
+
+  .cursor-dot {
+    @apply fixed pointer-events-none z-[10000] -translate-x-1/2 -translate-y-1/2 rounded-full;
+    width: 6px;
+    height: 6px;
+    background: var(--rose);
+    box-shadow: 0 0 12px oklch(0.78 0.18 15 / 0.8);
+  }
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(105vh) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-15vh) rotate(18deg);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.12);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.08);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1.4s ease-in-out infinite;
+}
+
+.animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
